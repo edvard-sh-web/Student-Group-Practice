@@ -1,5 +1,6 @@
 package lesson2;
 
+import java.io.File;
 import java.util.Optional;
 
 public class Main {
@@ -37,8 +38,8 @@ public class Main {
 			System.out.println("Student was not found.");
 		}
 
-		group.addStudent(group.readStudent());
-		
+//		group.addStudent(group.readStudent());
+
 		group.sortByLastName(group);
 
 		String s = st1.toCSVString();
@@ -48,5 +49,16 @@ public class Main {
 
 		System.out.println(group.toString());
 
+		GroupFileStorage.saveGroupToCSV(group);
+
+		File fileCSV = new File("325B.csv");
+
+		Group groupFromCSV = GroupFileStorage.loadGroupFromCSV(fileCSV);
+
+		System.out.println(groupFromCSV.toString());
+
+		File workFolder = new File(".");
+		File searchResult = GroupFileStorage.findFileByGroupName("325B", workFolder);
+		System.out.println(searchResult.getName());
 	}
 }
